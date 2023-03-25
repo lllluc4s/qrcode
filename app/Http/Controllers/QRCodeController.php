@@ -12,6 +12,12 @@ class QRCodeController extends Controller
         $url = url('/read/' . urlencode($request['name']));
         $qrCodeImage = QrCode::format('png')->size(300)->generate($url);
 
+        $qrCode = QrCode::create();
+        $qrCode->name = $request->input('name');
+        $qrCode->linkedin = $request->input('linkedin');
+        $qrCode->github = $request->input('github');
+        $qrCode->save();
+
         return view('qrcode-generate', [
             'qrCode' => $qrCodeImage,
             'name' => $request->input('name'),
@@ -19,6 +25,19 @@ class QRCodeController extends Controller
             'github' => $request->input('github')
         ]);
     }
+
+    // public function generate(Request $request)
+    // {
+    //     $url = url('/read/' . urlencode($request['name']));
+    //     $qrCodeImage = QrCode::format('png')->size(300)->generate($url);
+
+    //     return view('qrcode-generate', [
+    //         'qrCode' => $qrCodeImage,
+    //         'name' => $request->input('name'),
+    //         'linkedin' => $request->input('linkedin'),
+    //         'github' => $request->input('github')
+    //     ]);
+    // }
 
     public function read($data)
     {
