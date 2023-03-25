@@ -1,113 +1,84 @@
-/* Para telas menores que 600px */
-@media (max-width: 600px) {
-    div,
-    form {
-        height: auto;
-    }
-
-    input,
-    p,
-    button {
-        max-width: 100%;
-    }
+/* CSS reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* Para telas maiores que 600px */
-@media (min-width: 601px) {
-    div,
-    form {
-        height: 100vh;
-    }
-
-    input,
-    p,
-    button {
-        max-width: 300px;
-    }
-}
-
-/* Estilo para o botão */
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #ff2e63;
-    color: #fff;
-    cursor: pointer;
-    max-width: 300px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Estilo para a div que contém o formulário */
-div {
-    display: flex;
-    flex-direction: column;
+/* Body */
+body {
     align-items: center;
-    justify-content: center;
+    background-color: #101010;
+    color: #fff;
+    display: flex;
+    font-family: Arial, sans-serif;
     height: 100vh;
-    background: #fff;
+    justify-content: center;
+    margin: 0;
 }
 
-/* Estilo do formulário */
+/* Form */
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: #fff;
+    border-radius: 1rem;
+    margin: 0 auto;
+    margin-top: 1rem;
+    max-width: 30rem;
+    padding: 2rem;
 }
 
-h1 {
-    margin-top: 150px;
-    font-size: 40px;
-    font-weight: 500;
-    color: #333;
-}
-
-/* Estilo para os campos de entrada */
-input {
-    margin-bottom: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-    max-width: 300px;
-}
-
-/* Estilo para os campos de entrada */
-p {
-    margin-bottom: 10px;
-    padding: 8px;
-    width: 100%;
-    max-width: 300px;
-}
-
-.alert {
-    padding: 5px;
-    margin-bottom: 10px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    height: 38px;
-    line-height: 38px;
-}
-
-.alert-danger {
-    color: #721c24;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-}
-
-/* Estilo para o botão */
-.button {
-    margin-top: 20px;
-    padding: 10px 20px;
+/* Form fields */
+input[type="text"] {
+    background-color: #303030;
     border: none;
-    border-radius: 5px;
-    background-color: #ff2e63;
+    border-radius: 0.5rem;
+    box-shadow: inset 0 0 0.5rem rgba(255, 255, 255, 0.1);
+    color: #fff;
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+/* Buttons */
+a,
+button,
+.button {
+    background-color: #be0000;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.2);
     color: #fff;
     cursor: pointer;
-    max-width: 300px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    text-decoration: none;
+    width: 100%;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:hover {
+    background-color: #c50000;
+}
+
+/* Typography */
+h1,
+h2,
+p {
+    font-size: 2rem;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    max-width: 90%;
+    text-align: center;
+}
+
+/* Media queries */
+@media screen and (min-width: 768px) {
+    form {
+        margin-top: 2rem;
+    }
 }

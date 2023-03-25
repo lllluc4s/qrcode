@@ -23,8 +23,8 @@ class QrCodeRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'linkedin' => 'nullable|url',
-            'github' => 'nullable|url',
+            'linkedin' => 'required|url',
+            'github' => 'required|url',
 
         ];
     }
@@ -39,8 +39,10 @@ class QrCodeRequest extends FormRequest
         return [
             'name.required' => 'Name is required',
             'name.string' => 'Name must be a string',
+            'linkedin.required' => 'Linkedin URL is required',
             'linkedin.string' => 'Linkedin URL must be a string',
             'linkedin.url' => 'Linkedin URL must be a valid URL',
+            'github.required' => 'GitHub URL is required',
             'github.string' => 'GitHub URL must be a string',
             'github.url' => 'GitHub URL must be a valid URL',
         ];

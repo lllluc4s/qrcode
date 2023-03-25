@@ -1,27 +1,40 @@
-<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+<!DOCTYPE html>
+<html>
 
-<div>
-    <h1>QR Code Image Generator</h1>
+<head>
+    <meta charset="utf-8">
+    <title>QR Code Image Generator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+</head>
 
-    <form action="{{ route('qrcode.generate') }}" method="POST">
-        @csrf
-        <input type="text" name="name" placeholder="Nome:">
-        @error('name')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+<body>
+    <div>
+        <h1>QR Code Image Generator</h1>
 
-        <input type="text" name="linkedin" placeholder="LinkedIn URL:">
-        @error('linkedin')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+        <form action="{{ route('qrcode.generate') }}" method="POST">
+            @csrf
+            <input type="text" name="name" placeholder="Name:">
 
-        <input type="text" name="github" placeholder="GitHub URL:">
-        @error('github')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+            <input type="text" name="linkedin" placeholder="LinkedIn URL:">
 
-        <button type="submit">Gerar QR Code</button>
-    </form>
-</div>
+            <input type="text" name="github" placeholder="GitHub URL:">
 
-<script src="{{ asset('/js/main.js') }}"></script>
+            <button type="submit" class="button">Gerar QR Code</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.js"></script>
+    @if ($errors->any())
+    <script>
+        Swal.fire({
+            title: 'Ops! =(',
+            text: '{{ $errors->first() }}',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        })
+    </script>
+    @endif
+</body>
+
+</html>
