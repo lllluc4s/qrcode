@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\QrCodeRequest;
-use App\Models\QRCode as ModelQRCode;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Models\QRCode;
+use SimpleSoftwareIO\QrCode\Facades\QrCode as QrCodeGenerator;
 
 class QRCodeController extends Controller
 {
@@ -18,41 +18,13 @@ class QRCodeController extends Controller
     {
         $url = url('/read') . '?name=' . urlencode($request->input('name'));
 
-        if ($request->input('linkedin')) {
-            $url .= '&linkedin=' . urlencode($request->input('linkedin'));
+        foreach (['linkedin', 'github'] as $field) {
+            if ($request->input($field)) {
+                $url .= '&' . $field . '=' . urlencode($request->input($field));
+            }
         }
-        if ($request->input('github')) {
-            $url .= '&github=' . urlencode($request->input('github'));
-        }
 
-        return QrCode::format('png')->size(300)->generate($url);
-    }
-
-    /**
-     * Create a new QR code image based on user input.
-     *
-     * @param QrCodeRequest $request The user input request data.
-     * @return string The created QR code image.
-     */
-    private function createQrCode(QrCodeRequest $request): string
-    {
-        $qrCodeImage = $this->generateQrCode($request);
-        return $qrCodeImage;
-    }
-
-    /**
-     * Create a new QR code model based on user input.
-     *
-     * @param QrCodeRequest $request The user input request data.
-     * @return ModelQRCode The created QR code model.
-     */
-    private function createModelQRCode(QrCodeRequest $request)
-    {
-        return ModelQRCode::create([
-            'name' => $request->input('name'),
-            'linkedin' => $request->input('linkedin'),
-            'github' => $request->input('github')
-        ]);
+        return QrCodeGenerator::format('png')->size(300)->generate($url);
     }
 
     /**
@@ -63,17 +35,15 @@ class QRCodeController extends Controller
      */
     public function generate(QrCodeRequest $request)
     {
-        $qrCodeImage = $this->createQrCode($request);
-        $qrCode = $this->createModelQRCode($request);
+        $qrCodeImage = $this->generateQrCode($request);
+        $qrCode = QRCode::create($request->only(['name', 'linkedin', 'github']));
 
         return view('qrcode-generate', [
             'qrCode' => $qrCodeImage,
             'name' => $qrCode->name,
             'linkedin' => $qrCode->linkedin,
             'github' => $qrCode->github
-        ])
-            ->with('success', 'QR Code generated successfully!')
-            ->with('errors', $request->messages());
+        ])->with('success', 'QR Code generated successfully!');
     }
 
     /**
