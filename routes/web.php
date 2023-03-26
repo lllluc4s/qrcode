@@ -20,4 +20,4 @@ Route::get('/', function () {
 
 Route::post('/generate', [QRCodeController::class, 'generate'])->name('qrcode.generate');
 
-Route::get('/read/{data}', [QRCodeController::class, 'read'])->name('qrcode.read');
+Route::get('/read/{id}', [QRCodeController::class, 'read'])->name('qrcode.read');

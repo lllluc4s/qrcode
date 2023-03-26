@@ -9,13 +9,15 @@
 
 <body>
     <div>
-        <h1>{{ $name }}</h1>
+        <h1>{{ $qrCode->name }}</h1>
         <p>Scan me</p>
-        <img src="data:image/png;base64,{{ base64_encode($qrCode) }}">
+        <img src="data:image/png;base64,{{ base64_encode($qrCodeImage) }}">
         <br><br>
 
-        <a href="{{ route('qrcode.read', [$name, $linkedin, $github]) }}">Click here to read QR Code information</a>
+        <a href="{{ route('qrcode.read', $qrCode->id) }}">Click here to read QR Code information</a>
     </div>
+
+
 </body>
 
 </html>
