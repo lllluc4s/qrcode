@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('linkedin')->nullable();
             $table->string('github')->nullable();
-            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

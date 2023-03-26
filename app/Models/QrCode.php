@@ -15,6 +15,5 @@ class QRCode extends Model
         'name',
         'linkedin',
         'github',
-        'image'
     ];
 }

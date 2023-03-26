@@ -24,8 +24,16 @@ class QrCodeRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'linkedin' => ['required', 'url', new UniqueLinkedInOrGithub(request()->linkedin, request()->github)],
-            'github' => ['required', 'url', new UniqueLinkedInOrGithub(request()->linkedin, request()->github)],
+            'linkedin' => [
+                'required',
+                'url',
+                new UniqueLinkedInOrGithub(request()->linkedin, request()->github)
+            ],
+            'github' => [
+                'required',
+                'url',
+                new UniqueLinkedInOrGithub(request()->linkedin, request()->github)
+            ],
         ];
     }
 

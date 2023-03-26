@@ -15,7 +15,6 @@ class QRCodeController extends Controller
         if ($request->input('linkedin')) {
             $url .= '&linkedin=' . urlencode($request->input('linkedin'));
         }
-
         if ($request->input('github')) {
             $url .= '&github=' . urlencode($request->input('github'));
         }
@@ -26,7 +25,6 @@ class QRCodeController extends Controller
     private function createQrCode(QrCodeRequest $request): string
     {
         $qrCodeImage = $this->generateQrCode($request);
-
         return $qrCodeImage;
     }
 
@@ -46,9 +44,9 @@ class QRCodeController extends Controller
 
         return view('qrcode-generate', [
             'qrCode' => $qrCodeImage,
-            'name' => $request->input('name'),
-            'linkedin' => $request->input('linkedin'),
-            'github' => $request->input('github')
+            'name' => $qrCode->name,
+            'linkedin' => $qrCode->linkedin,
+            'github' => $qrCode->github
         ])
             ->with('success', 'QR Code generated successfully!')
             ->with('errors', $request->messages());
@@ -59,9 +57,9 @@ class QRCodeController extends Controller
         $dataArray = explode(' ', $data);
 
         return view('qrcode-read', [
-            'name' => $dataArray[0] ?? '',
-            'linkedin' => $dataArray[1] ?? '',
-            'github' => $dataArray[2] ?? ''
+            'name' => $dataArray[0],
+            'linkedin' => $dataArray[1],
+            'github' => $dataArray[2]
         ]);
     }
 }
