@@ -57,9 +57,9 @@ class QRCodeController extends Controller
         $dataArray = explode(' ', $data);
 
         return view('qrcode-read', [
-            'name' => $dataArray[0],
-            'linkedin' => $dataArray[1],
-            'github' => $dataArray[2]
+            'name' => $dataArray[0] ?? '',
+            'linkedin' => $dataArray[1] ?? '',
+            'github' => $dataArray[2] ?? ''
         ]);
     }
 }
