@@ -47,21 +47,16 @@ class QRCodeController extends Controller
      */
     public function read($id)
     {
-        // Buscar as informações do QRCode pelo ID
         $qrcode = QRCode::find($id);
 
-        // Verificar se o QRCode foi encontrado
-        if ($qrcode) {
-            // Extrair os dados relevantes do QRCode
-            $name = $qrcode->name ?? '';
-            $linkedin = $qrcode->linkedin ?? '';
-            $github = $qrcode->github ?? '';
-
-            // Retornar a view com os dados relevantes do QRCode
-            return view('qrcode-read', compact('name', 'linkedin', 'github'));
-        } else {
-            // Caso o QRCode não seja encontrado, redirecionar para uma página de erro
-            return redirect()->route('error');
+        if (!$qrcode) {
+            abort(404, 'QR Code not found!');
         }
+
+        $name = $qrcode->name ?? '';
+        $linkedin = $qrcode->linkedin ?? '';
+        $github = $qrcode->github ?? '';
+
+        return view('qrcode-read', compact('name', 'linkedin', 'github'));
     }
 }
