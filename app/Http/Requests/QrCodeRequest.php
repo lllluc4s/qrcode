@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\UniqueLinkedInOrGithub;
 use Illuminate\Foundation\Http\FormRequest;
 
 class QrCodeRequest extends FormRequest
@@ -19,13 +20,12 @@ class QrCodeRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             'name' => 'required|string',
-            'linkedin' => 'required|url',
-            'github' => 'required|url',
-
+            'linkedin' => ['required', 'url', new UniqueLinkedInOrGithub(request()->linkedin, request()->github)],
+            'github' => ['required', 'url', new UniqueLinkedInOrGithub(request()->linkedin, request()->github)],
         ];
     }
 
@@ -45,6 +45,8 @@ class QrCodeRequest extends FormRequest
             'github.required' => 'GitHub URL is required',
             'github.string' => 'GitHub URL must be a string',
             'github.url' => 'GitHub URL must be a valid URL',
+            'linkedin.unique_linked_in_or_github' => 'LinkedIn and GitHub URLs must be different.',
+            'github.unique_linked_in_or_github' => 'LinkedIn and GitHub URLs must be different.',
         ];
     }
 }

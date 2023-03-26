@@ -9,7 +9,7 @@
 
 <body>
     <div>
-        <h1>{{ $name }} &#x1F60A;</h1>
+        <h1>{{ $name }}</h1>
         <p>Scan me</p>
         <img src="data:image/png;base64,{{ base64_encode($qrCode) }}">
         <br><br>

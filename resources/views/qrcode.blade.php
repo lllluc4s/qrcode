@@ -20,7 +20,7 @@
 
             <input type="text" name="github" placeholder="GitHub URL:">
 
-            <button type="submit" class="button">Gerar QR Code</button>
+            <button type="submit" class="button">Generate QR Code</button>
         </form>
     </div>
 

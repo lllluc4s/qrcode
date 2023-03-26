@@ -44,9 +44,9 @@ input[type="text"] {
 a,
 button,
 .button {
-    background-color: #be0000;
+    background: -webkit-linear-gradient(#ff1b43,#be0000);
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
     box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.2);
     color: #fff;
     cursor: pointer;
