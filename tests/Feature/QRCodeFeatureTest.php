@@ -46,6 +46,25 @@ class QRCodeFeatureTest extends TestCase
     }
 
     /**
+     * Test the generator method of QRCodeController.
+     *
+     * @return void
+     */
+    public function testGenerateMethodWithInvalidData()
+    {
+        $request = new QrCodeRequest([
+            'name' => 'John Doe',
+            'linkedin' => 'https://www.linkedin.com/in/johndoe',
+            'github' => 'xxx',
+        ]);
+
+        $response = $this->post(route('qrcode.generate', $request->id), $request->all());
+        $response->assertSessionHasErrors(['github']);
+
+        $this->assertDatabaseMissing('qr_codes', $this->qrCodeData);
+    }
+
+    /**
      * Test the QRCodeController read method.
      *
      * @return void
