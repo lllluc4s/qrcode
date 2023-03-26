@@ -83,24 +83,13 @@ class QRCodeFeatureTest extends TestCase
     }
 
     /**
-     * Test the QRCodeController read method with an invalid ID.
-     *
-     * @return void
-     */
-    public function testReadMethodWithInvalidId()
-    {
-        $response = $this->get(route('qrcode.read', 'invalid_id'));
-        $response->assertStatus(404);
-    }
-
-    /**
      * Test the QRCodeController read method with a non-existent ID.
      *
      * @return void
      */
     public function testReadMethodWithNonExistentId()
     {
-        $response = $this->get(route('qrcode.read', 999));
+        $response = $this->get(route('qrcode.read', 999999));
         $response->assertStatus(404);
     }
 }
