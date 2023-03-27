@@ -13,10 +13,10 @@ COPY . /app
 # Install any needed packages
 RUN apt-get update && \
     apt-get install -y --no-install-recommends && \
-    apt-get install -y libpng-dev libjpeg-dev libpq-dev && \
+    apt-get install -y libpng-dev libjpeg-dev && \
     docker-php-ext-configure gd --with-jpeg=/usr/include/ && \
-    docker-php-ext-install pdo_pgsql pgsql gd && \
-    apt-get install -y postgresql-client && \
+    docker-php-ext-install pdo_mysql gd && \
+    apt-get install -y libpq-dev default-mysql-client && \
     apt-get install -y libmagickwand-dev && \
     pecl install imagick && \
     docker-php-ext-enable imagick

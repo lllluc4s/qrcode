@@ -23,7 +23,7 @@ docker exec -it qrcode-web-1 composer install
 5- Run the database migrations:
 
 ```sh
-docker exec -it qrcode-web-1 php artisan migrate
+docker exec -it qrcode-web-1 php artisan migrate:fresh --seed
 ```
 
 Access the application in your web browser at http://localhost:8000.

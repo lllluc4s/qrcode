@@ -5,6 +5,9 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+        image: bitnami/laravel:latest
+        restart: unless-stopped
+        working_dir: /app
         ports:
             - "8008:8008"
         volumes:
@@ -13,10 +16,9 @@ services:
             - db
 
     db:
-        image: postgres:latest
+        image: mysql:latest
         environment:
-            POSTGRES_DB: qrcode
-            POSTGRES_USER: root
-            POSTGRES_PASSWORD: root
+            MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+            MYSQL_DATABASE: qrcode
         ports:
-            - "5432:5432"
+            - "3333:3306"
