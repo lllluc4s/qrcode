@@ -24,9 +24,15 @@ RUN apt-get update && \
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Install Composer
+RUN apt-get update && \
+    apt-get install -y git zip && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Expose port 8000 and start php-fpm server
+# Install project dependencies
+COPY composer.json composer.lock /app/
+RUN composer install --prefer-dist --no-dev --no-scripts --no-progress --no-interaction
+
+# Expose port 8008 and start php-fpm server
 EXPOSE 8008
 CMD php artisan serve --host=0.0.0.0 --port=8008
