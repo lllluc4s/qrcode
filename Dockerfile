@@ -1,4 +1,3 @@
-# Use an official PHP runtime as a parent image
 FROM php:8.1.1-fpm
 
 # Set php.ini
@@ -21,10 +20,12 @@ RUN apt-get update && \
     pecl install imagick && \
     docker-php-ext-enable imagick
 
-# Install Composer and dependencies
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN composer install
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Expose port 8008 and start php-fpm server
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Expose port 8000 and start php-fpm server
 EXPOSE 8008
 CMD php artisan serve --host=0.0.0.0 --port=8008
