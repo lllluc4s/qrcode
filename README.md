@@ -14,19 +14,25 @@ This is a simple QR code generator that allows users to create QR codes with the
 
 5- Create a database named "qrcode".
 
-6- Install the dependencies:
+6- Copy the .env.example file to .env and update the database credentials.
+
+```sh
+cp .env.example .env
+```
+
+7- Install the dependencies:
 
 ```sh
 composer install
 ```
 
-7- Run the database migrations:
+8- Run the database migrations:
 
 ```sh
 php artisan migrate:fresh --seed
 ```
 
-8- Run the application:
+9- Run the application:
 
 ```sh
 php artisan serve

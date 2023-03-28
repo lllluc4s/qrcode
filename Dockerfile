@@ -11,20 +11,28 @@ COPY . /app
 
 # Install any needed packages
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends && \
-    apt-get install -y libpng-dev libjpeg-dev && \
-    docker-php-ext-configure gd --with-jpeg=/usr/include/ && \
-    docker-php-ext-install pdo_mysql gd && \
-    apt-get install -y libpq-dev default-mysql-client && \
-    apt-get install -y libmagickwand-dev && \
-    pecl install imagick && \
-    docker-php-ext-enable imagick
+    apt-get install -y --no-install-recommends \
+    git \
+    unzip \
+    libpng-dev \
+    libjpeg-dev \
+    libpq-dev \
+    default-mysql-client \
+    libmagickwand-dev \
+    && docker-php-ext-configure gd --with-jpeg=/usr/include/ \
+    && docker-php-ext-install pdo_mysql gd \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Composer and project dependencies
+COPY composer.json composer.lock /app/
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    composer install
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Expose port 8000 and start php-fpm server
 EXPOSE 8008
