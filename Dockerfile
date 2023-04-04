@@ -1,4 +1,4 @@
-FROM php:8.1.1-fpm
+FROM php:8.2-fpm
 
 # Set php.ini
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
@@ -19,8 +19,11 @@ RUN apt-get update && \
     libpq-dev \
     default-mysql-client \
     libmagickwand-dev \
+    libonig-dev \
+    libxml2-dev \
+    libcurl4-openssl-dev \
     && docker-php-ext-configure gd --with-jpeg=/usr/include/ \
-    && docker-php-ext-install pdo_mysql gd \
+    && docker-php-ext-install pdo_mysql gd mbstring dom xml curl \
     && pecl install imagick \
     && docker-php-ext-enable imagick \
     && apt-get clean \

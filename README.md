@@ -6,7 +6,11 @@ This is a simple QR code generator that allows users to create QR codes with the
 
 1- Clone this repository.
 
-2- Install PHP on your machine.
+2- Install PHP and dependencies on your machine.
+
+```sh
+sudo apt-get install php8.2 php8.2-curl php8.2-mysql php8.2-xml php8.2-zip php8.2-dom php8.2-gd php8.2-fpm php8.2-mbstring php8.2-imagick
+```
 
 3- Install Composer on your machine.
 
@@ -14,25 +18,36 @@ This is a simple QR code generator that allows users to create QR codes with the
 
 5- Create a database named "qrcode".
 
-6- Copy the .env.example file to .env and update the database credentials.
+6- Copy the .env.example file to .env.
 
 ```sh
 cp .env.example .env
 ```
 
-7- Install the dependencies:
+7- Set the database connection in .env file:
+
+```sh
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=qrcode
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+8- Install the dependencies:
 
 ```sh
 composer install
 ```
 
-8- Run the database migrations:
+9- Run the database migrations:
 
 ```sh
 php artisan migrate:fresh --seed
 ```
 
-9- Run the application:
+10- Run the application:
 
 ```sh
 php artisan serve
@@ -42,9 +57,18 @@ Access the application in your web browser at http://localhost:8000.
 
 ### Setup on Docker
 
-1- Clone this repository.
+1- Install Docker on your machine.
 
-2- Install Docker on your machine.
+2- Set the database connection in .env file:
+
+```sh
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=qrcode
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
 3- Build and run the Docker container:
 
