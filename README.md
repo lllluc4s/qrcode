@@ -44,13 +44,13 @@ composer install
 9- Run the database migrations:
 
 ```sh
-php artisan migrate:fresh --seed
+sudo php artisan migrate:fresh --seed
 ```
 
 10- Run the application:
 
 ```sh
-php artisan serve
+sudo php artisan serve
 ```
 
 Access the application in your web browser at http://localhost:8000.
@@ -73,7 +73,7 @@ DB_PASSWORD=
 3- Build and run the Docker container:
 
 ```sh
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 4- Install the dependencies:
