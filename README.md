@@ -9,7 +9,8 @@ This is a simple QR code generator that allows users to create QR codes with the
 2- Install PHP and dependencies on your machine.
 
 ```sh
-sudo apt-get install php8.2 php8.2-curl php8.2-mysql php8.2-xml php8.2-zip php8.2-dom php8.2-gd php8.2-fpm php8.2-mbstring php-imagick
+sudo apt-get install php8.2 php8.2-curl php8.2-mysql php8.2-xml php8.2-zip php8.2-dom php8.2-gd php8.2-fpm php8.2-mbstring
+&& pecl install imagick
 ```
 
 3- Install Composer on your machine.
